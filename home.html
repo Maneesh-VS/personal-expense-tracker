@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .analytics { background: #f2f2f2; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
+        form { margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        input, select { margin: 5px; padding: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+
+    <div class="analytics">
+        <p><strong>Total Expenses:</strong> ₹{{ total_expense }}</p>
+        <p><strong>Highest Expense Category:</strong> {{ highest_category }}</p>
+    </div>
+
+    <h2>Add New Expense</h2>
+    <form method="POST" action="/add">
+        <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+        <input type="text" name="category" placeholder="Category" required>
+        <input type="date" name="date" required>
+        <input type="text" name="note" placeholder="Note">
+        <button type="submit">Add Expense</button>
+    </form>
+
+    <h2>Expense List</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Note</th>
+        </tr>
+        {% for exp in expenses %}
+        <tr>
+            <td>{{ exp.id }}</td>
+            <td>{{ exp.amount }}</td>
+            <td>{{ exp.category }}</td>
+            <td>{{ exp.expense_date }}</td>
+            <td>{{ exp.note }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
